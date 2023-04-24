@@ -14,6 +14,8 @@ protocol PokedexHomeAPIDataManagerProtocol {
 
 final class PokedexHomeAPIDataManager: PokedexHomeAPIDataManagerProtocol {
 
+  private let limmit: Int  = 10
+
   typealias PokemonsResponse = AnyPublisher<Response<PokemonsModel>, APIError>
 
   private let network: NetworkingProtocol
@@ -23,7 +25,7 @@ final class PokedexHomeAPIDataManager: PokedexHomeAPIDataManagerProtocol {
   }
 
   func getPokemons(offset: Int) -> AnyPublisher<PokemonsModel, APIError> {
-    let pokemonPagination = PokedexParameter(offset: offset, limit: 10)
+    let pokemonPagination = PokedexParameter(offset: offset, limit: limmit)
     let service: PokedexServices = PokedexServices.getPokemonList(pokemonPagination)
     let publisher: PokemonsResponse
     publisher = network.perform(service: service)
