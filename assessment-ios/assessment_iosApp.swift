@@ -9,12 +9,10 @@ import SwiftUI
 
 @main
 struct assessment_iosApp: App {
-    let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
-            HomeView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+          PokedexHomeRouter.createPokedexHomeView()
         }
     }
 }
